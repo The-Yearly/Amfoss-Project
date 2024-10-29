@@ -27,7 +27,7 @@ func main() {
 			heading := h.Text
 			p := h.DOM.Parent()
 			link, _ := p.Attr("href")
-			fmt.Println("Title: ", heading, "Link: ", link, "\n")
+			fmt.Println(co+1, ") Title: ", heading, "	Link: ", link, "\n")
 			co += 1
 		} else {
 			return
@@ -41,5 +41,5 @@ func main() {
 	})
 	c.Visit(url)
 	c.Wait()
-	fmt.Println(co)
+	fmt.Println("Found ", co, "Results")
 }
