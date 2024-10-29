@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/gocolly/colly/v2"
@@ -19,9 +21,12 @@ func main() {
 	var s string
 	var url string
 	fmt.Println("Enter Search Word")
-	fmt.Scan(&s)
-	sl := strings.ToLower(s)
-	url = "https://www.google.com/search?q=" + sl
+	reader := bufio.NewReader(os.Stdin)
+	s, _ = reader.ReadString('\n')
+	sl := strings.TrimSpace(strings.ToLower(s))
+	spaces := strings.Count(sl, " ")
+	nsl := strings.Replace(sl, " ", "+", spaces)
+	url = "https://www.google.com/search?q=" + nsl
 	c.OnHTML("h3.LC20lb.MBeuO.DKV0Md", func(h *colly.HTMLElement) {
 		if co != 10 {
 			heading := h.Text
